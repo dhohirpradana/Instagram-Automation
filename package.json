@@ -11,12 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.2.2",
-    "cron": "^2.1.0",
     "dotenv": "^16.0.3",
     "instagram-private-api": "^1.45.3",
     "node-fetch": "^3.3.0",
-    "request-promise": "^4.2.6",
-    "text-to-image": "^5.2.0",
-    "unsplash-js": "^7.0.15"
+    "request-promise": "^4.2.6"
   }
 }
