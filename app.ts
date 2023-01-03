@@ -1,4 +1,5 @@
 import axios from "axios";
+import bluebird from "bluebird";
 import { IgApiClient } from "instagram-private-api";
 import { StickerBuilder } from "instagram-private-api/dist/sticker-builder";
 import { get } from "request-promise";
@@ -60,6 +61,9 @@ async function login() {
     publishPhoto
   );
 
+  // delay for 3 seconds
+  await bluebird.delay(3000);
+
   // share to story
   const story = await ig.publish.story({
     file: imageBuffer,
@@ -79,4 +83,18 @@ async function login() {
       .build(),
   });
   console.log("🚀 ~ file: app.ts:73 ~ story", story);
+
+  // delay for 5 seconds
+  await bluebird.delay(5000);
+
+  // like a publishPhoto
+  await ig.media.like({
+    mediaId: publishPhoto.media.id,
+    moduleInfo: {
+      module_name: "profile",
+      user_id: publishPhoto.media.user.pk,
+      username: publishPhoto.media.user.username,
+    },
+    d: 0,
+  });
 })();
