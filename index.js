@@ -23,7 +23,7 @@ const postToInsta = async () => {
   var photo = data;
   var user = photo.user;
   var username = user.username;
-  var credit = `\nPhoto by https://unsplash.com/@${username}`;
+  var credit = `\nPhoto by ${username} on Unsplash`;
   var link = photo.urls.regular;
 
   var quotes = await axios("https://api.api-ninjas.com/v1/quotes", {
