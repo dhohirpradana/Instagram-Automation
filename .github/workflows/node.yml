@@ -28,6 +28,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+
+      - name: Install ts-node
+        run: npm install -g ts-node
           
       - name: Install dependencies
         run: npm install
@@ -38,4 +41,4 @@ jobs:
           IG_PASSWORD: '${{ secrets.IG_PASSWORD }}'
           UNSPLASH_ACCESS_KEY: '${{ secrets.UNSPLASH_ACCESS_KEY }}'
           QUOTES_API_KEY: '${{ secrets.QUOTES_API_KEY }}'
-        run: node index.js
+        run: ts-node app.ts

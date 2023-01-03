@@ -50,13 +50,6 @@ const postToInsta = async () => {
     "🚀 ~ file: index.js:49 ~ postToInsta ~ publistPhoto",
     publistPhoto
   );
-
-  // publish to story
-  const story = await ig.publish.story({
-    file: imageBuffer,
-    caption: quote,
-  });
-  console.log("🚀 ~ file: index.js:56 ~ postToInsta ~ story", story);
 };
 
 postToInsta();

@@ -15,5 +15,8 @@
     "instagram-private-api": "^1.45.3",
     "node-fetch": "^3.3.0",
     "request-promise": "^4.2.6"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.2.0"
   }
 }
