@@ -7,7 +7,7 @@ const postToInsta = async () => {
   const ig = new IgApiClient();
   ig.state.generateDevice(process.env.IG_USERNAME); // Execute all requests prior to authorization in the real Android application
   // Not required but recommended
-  await ig.simulate.preLoginFlow();
+  // await ig.simulate.preLoginFlow();
   await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
 
   const unsplashAccessKey = process.env.UNSPLASH_ACCESS_KEY;
@@ -46,14 +46,17 @@ const postToInsta = async () => {
     file: imageBuffer,
     caption: quote + "\n" + author + "\n" + credit,
   });
-  console.log("🚀 ~ file: index.js:49 ~ postToInsta ~ publistPhoto", publistPhoto)
+  console.log(
+    "🚀 ~ file: index.js:49 ~ postToInsta ~ publistPhoto",
+    publistPhoto
+  );
 
   // publish to story
   const story = await ig.publish.story({
     file: imageBuffer,
     caption: quote,
   });
-  console.log("🚀 ~ file: index.js:56 ~ postToInsta ~ story", story)
+  console.log("🚀 ~ file: index.js:56 ~ postToInsta ~ story", story);
 };
 
 postToInsta();
