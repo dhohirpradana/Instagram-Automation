@@ -1,8 +1,7 @@
 import axios from "axios";
 import bluebird from "bluebird";
 import { IgApiClient } from "instagram-private-api";
-import { StickerBuilder } from "instagram-private-api/dist/sticker-builder";
-import { get } from "request-promise";
+import { UltimateTextToImage } from "ultimate-text-to-image";
 
 require("dotenv").config();
 
@@ -16,27 +15,54 @@ async function login() {
     process.env.IG_PASSWORD ?? ""
   );
   // await ig.simulate.postLoginFlow();
+  // process.nextTick(async () => await ig.simulate.postLoginFlow());
+}
+
+async function generateImage(text: string) {
+  const textToImage = new UltimateTextToImage(text, {
+    align: "center",
+    // instagram post portrait ratio
+    width: 1080,
+    height: 1350,
+    fontSize: 24,
+    fontFamily: "Cursive",
+    lineHeight: 30,
+    margin: 50,
+    alignToCenterIfLinesLE: 1,
+    // milky white
+    backgroundColor: "#f0f0f0",
+    // hex grey
+    fontColor: "#7e7e7e",
+    valign: "middle",
+    alignToCenterIfHeightLE: 1,
+    // images: [{ canvasImage: canvasImage1, layer: -1, repeat: "fit" }],
+  }).render();
+  const bufferJpeg = textToImage.toBuffer("image/jpeg", {
+    quality: 100,
+    progressive: true,
+  });
+  return bufferJpeg;
 }
 
 (async () => {
   await login();
-  const unsplashAccessKey = process.env.UNSPLASH_ACCESS_KEY;
+  // const unsplashAccessKey = process.env.UNSPLASH_ACCESS_KEY;
 
-  const photos = await axios(
-    "https://api.unsplash.com/photos/random?query=minimal",
-    {
-      headers: {
-        Authorization: `Client-ID ${unsplashAccessKey}`,
-      },
-    }
-  );
+  // const photos = await axios(
+  //   "https://api.unsplash.com/photos/random?query=minimal",
+  //   {
+  //     headers: {
+  //       Authorization: `Client-ID ${unsplashAccessKey}`,
+  //     },
+  //   }
+  // );
 
-  const data = photos.data;
-  var photo = data;
-  var user = photo.user;
-  var username = user.username;
-  var credit = `\nPhoto by ${username} on Unsplash`;
-  var link = photo.urls.regular;
+  // const data = photos.data;
+  // var photo = data;
+  // var user = photo.user;
+  // var username = user.username;
+  // var credit = `\nPhoto by ${username} on Unsplash`;
+  // var link = photo.urls.regular;
 
   var quotes = await axios("https://api.api-ninjas.com/v1/quotes", {
     headers: {
@@ -47,54 +73,65 @@ async function login() {
   var quote = quotes.data[0].quote;
   var author = quotes.data[0].author;
 
-  const imageBuffer = await get({
-    url: link,
-    encoding: null,
-  });
+  // const imageBuffer1 = await get({
+  //   url: link,
+  //   encoding: null,
+  // });
+  // console.log("🚀 ~ file: app.ts:79 ~ imageBuffer1", imageBuffer1);
 
-  var publishPhoto = await ig.publish.photo({
-    file: imageBuffer,
-    caption: quote + "\n" + author + "\n" + credit,
-  });
-  console.log(
-    "🚀 ~ file: index.js:49 ~ postToInsta ~ publistPhoto",
-    publishPhoto
-  );
+  var imageBuffer = await generateImage(quote + "\n\n" + author);
+
+  try {
+    var publishPhoto = await ig.publish.photo({
+      file: imageBuffer,
+      caption: quote + "\n" + author + "\n",
+    });
+    console.log(
+      "🚀 ~ file: index.js:49 ~ postToInsta ~ publistPhoto",
+      publishPhoto
+    );
+
+    // delay for 5 seconds
+    await bluebird.delay(5000);
+
+    // like a publishPhoto
+    await ig.media.like({
+      mediaId: publishPhoto.media.id,
+      moduleInfo: {
+        module_name: "profile",
+        user_id: publishPhoto.media.user.pk,
+        username: publishPhoto.media.user.username,
+      },
+      d: 0,
+    });
+  } catch (error) {
+    console.log("🚀 ~ file: app.ts:88 ~ error", error);
+  }
 
   // delay for 3 seconds
-  await bluebird.delay(3000);
+  // await bluebird.delay(3000);
 
-  // share to story
-  const story = await ig.publish.story({
-    file: imageBuffer,
-    stickerConfig: new StickerBuilder()
-      .add(
-        StickerBuilder.hashtag({
-          tagName: "minimal",
-        }).center()
-      )
-      // .add(
-      //   StickerBuilder.attachmentFromMedia(
-      //     (
-      //       await ig.feed.timeline().items()
-      //     )[0]
-      //   ).center()
-      // )
-      .build(),
-  });
-  console.log("🚀 ~ file: app.ts:73 ~ story", story);
-
-  // delay for 5 seconds
-  await bluebird.delay(5000);
-
-  // like a publishPhoto
-  await ig.media.like({
-    mediaId: publishPhoto.media.id,
-    moduleInfo: {
-      module_name: "profile",
-      user_id: publishPhoto.media.user.pk,
-      username: publishPhoto.media.user.username,
-    },
-    d: 0,
-  });
+  // // share to story
+  // try {
+  //   const story = await ig.publish.story({
+  //     file: imageBuffer,
+  //     stickerConfig: new StickerBuilder()
+  //       .add(
+  //         StickerBuilder.hashtag({
+  //           tagName: "minimal",
+  //         }).center()
+  //       )
+  //       // .add(
+  //       //   StickerBuilder.attachmentFromMedia(
+  //       //     (
+  //       //       await ig.feed.timeline().items()
+  //       //     )[0]
+  //       //   ).center()
+  //       // )
+  //       .build(),
+  //   });
+  //   console.log("🚀 ~ file: app.ts:73 ~ story", story);
+  // } catch (error) {
+  //   console.log("🚀 ~ file: app.ts:88 ~ error", error);
+  // }
 })();
