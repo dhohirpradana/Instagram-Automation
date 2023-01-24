@@ -4,7 +4,6 @@ Automate post Instagram feed and Instagram story.
 
 # Steps
 1. *Instagram account*
-Go to Twitter developer site [Twitter Developer](https://developer.twitter.com "Twitter Developer") and register twitter developer -> Create new project -> Create app -> Keys and token
 
 |key name|description|
 |--------|--------------|
