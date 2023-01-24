@@ -1,6 +1,6 @@
-# Twitter Automation Change Name and Banner
+# Instagram Automation Feed and Story
 
-Automate change of name and Twitter profile banner using Python code and Github action.
+Automate post Instagram feed and Instagram story.
 
 # Steps
 1. *Instagram account*
@@ -73,5 +73,4 @@ jobs:
 5. Save
 
 # Good Luck
-# Instagram-Automation
 [![Instagram Automation](https://github.com/dhohirpradana/Instagram-Automation/actions/workflows/node.yml/badge.svg)](https://github.com/dhohirpradana/Instagram-Automation/actions/workflows/node.yml)
