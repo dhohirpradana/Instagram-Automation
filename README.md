@@ -11,11 +11,11 @@ Automate post Instagram feed and Instagram story.
 |IG\_PASSWORD|Instagram password|
 |QUOTES\_API\_KEY|API-Ninjas API key, you can get it from https://api-ninjas.com/api/quotes|
 
-2. *Set Github Secrets*
-Go to your repository -> Settings -> Secrets -> Action -> Set Your IG_USERNAME, IG_PASSWORD
-
-3. *Use this template or Clone this repository and push to your Github*
+2. *Use this template or Clone this repository and push to your Github*
 https://github.com/dhohirpradana/Instagram-Automation.git
+
+3. *Set Github Secrets*
+Go to your repository -> Settings -> Secrets -> Action -> Set Your IG_USERNAME, IG_PASSWORD
 
 4. (*if .github/workflows/main.yml not exists)* *Create Workflow*
 Go to your repository -> Actions -> New workflow -> Setup a workflow yourself -> whatever.yaml
