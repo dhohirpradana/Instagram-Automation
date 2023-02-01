@@ -9,6 +9,7 @@ on:
   # Triggers the workflow with scheduler
   schedule:
     - cron: '0 17 * * *'
+    # - cron: '0 11 * * *'
     - cron: '0 05 * * *'
 
   # Allows you to run this workflow manually from the Actions tab

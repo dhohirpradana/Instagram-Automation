@@ -109,7 +109,31 @@ async function generateImage(text: string) {
   }
 
   // delay for 3 seconds
-  // await bluebird.delay(3000);
+  await bluebird.delay(3000);
+
+  // like 5 user feed
+  const feed = ig.feed.timeline();
+  const items = await feed.items();
+  // console.log("🚀 ~ file: app.ts:117 ~ items", items)
+
+  var likeTimes = 5;
+  items.forEach(async (item) => {
+    if (likeTimes === 0) return;
+    await ig.media.like({
+      mediaId: item.id,
+      moduleInfo: {
+        module_name: "profile",
+        user_id: item.user.pk,
+        username: item.user.username,
+      },
+      d: 0,
+    });
+
+    // delay for random between 5 and 15 seconds
+    await bluebird.delay(Math.floor(Math.random() * 10 + 5) * 1000);
+
+    likeTimes--;
+  });
 
   // // share to story
   // try {
