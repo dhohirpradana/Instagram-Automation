@@ -23,6 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - uses: actions/checkout@v3
       # Python
       - name: Install Python
         uses: actions/setup-python@v4
@@ -39,7 +40,6 @@ jobs:
         shell: bash
 
       # NodeJS
-      - uses: actions/checkout@v3
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
