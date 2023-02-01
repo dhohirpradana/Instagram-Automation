@@ -2,6 +2,7 @@ import axios from "axios";
 import bluebird from "bluebird";
 import { IgApiClient } from "instagram-private-api";
 import { UltimateTextToImage } from "ultimate-text-to-image";
+import { promises as fs } from "fs";
 
 require("dotenv").config();
 
@@ -16,6 +17,17 @@ async function login() {
   );
   // await ig.simulate.postLoginFlow();
   // process.nextTick(async () => await ig.simulate.postLoginFlow());
+}
+
+async function getRandPost(){
+  const results = await fs.readFile("results.txt", "utf8");
+  // get random line
+  function getRandLine(text: any) {
+    var rand = Math.floor(Math.random() * text.split("\n").length);
+    return text.split("\n")[rand];
+  }
+  var randLine = getRandLine(results);
+  return randLine;
 }
 
 async function generateImage(text: string) {
@@ -64,6 +76,9 @@ async function generateImage(text: string) {
   // var credit = `\nPhoto by ${username} on Unsplash`;
   // var link = photo.urls.regular;
 
+  var randPost = await getRandPost();
+  console.log("🚀 ~ file: app.ts:80 ~ randPost", randPost)
+
   var quotes = await axios("https://api.api-ninjas.com/v1/quotes", {
     headers: {
       "X-Api-Key": process.env.QUOTES_API_KEY,
@@ -86,10 +101,10 @@ async function generateImage(text: string) {
       file: imageBuffer,
       caption: quote + "\n" + author + "\n",
     });
-    console.log(
-      "🚀 ~ file: index.js:49 ~ postToInsta ~ publistPhoto",
-      publishPhoto
-    );
+    // console.log(
+    //   "🚀 ~ file: index.js:49 ~ postToInsta ~ publistPhoto",
+    //   publishPhoto
+    // );
 
     // delay for 5 seconds
     await bluebird.delay(5000);
