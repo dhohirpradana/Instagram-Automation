@@ -106,12 +106,17 @@ async function generateImage(text: string) {
 
     caption = randPostText;
 
-    var randPostImageBuffer = await get({
-      url: randPostImage,
-      encoding: null,
-    });
+    try {
+      var randPostImageBuffer = await get({
+        url: randPostImage,
+        encoding: null,
+      });
 
-    imageBuffer = randPostImageBuffer;
+      imageBuffer = randPostImageBuffer;
+    } catch (error) {
+      console.log("🚀 ~ file: app.ts:117 ~ getPosts ~ error", error)
+      return getQuotes();
+    }
   }
 
   if (randSource === "posts") {
