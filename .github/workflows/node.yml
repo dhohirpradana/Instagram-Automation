@@ -38,7 +38,13 @@ jobs:
         env:
           COOKIES: '${{ secrets.COOKIES }}'
         id: get-posts
-        run: python app.py
+        run: |
+          python app.py
+          git config user.name dhohirpradana
+          git config user.email dhohirkudus@gmail.com
+          git add results.txt
+          git commit -m "results.txt changes"
+          git push
         shell: bash
 
       # NodeJS
