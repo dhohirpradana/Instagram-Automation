@@ -23,15 +23,31 @@ async function login() {
 async function getRandPost() {
   try {
     const results = await fs.readFile("results.txt", "utf8");
+
     // get random line
     function getRandLine(text: any) {
-      var posts = text.split("\n");
+      var posts = text.split("ᴣᴣᴣ");
+
+      // remove blank lines
+      posts = posts.filter(function (el: string) {
+          return el != "";
+      });
+
       var rand = Math.floor(Math.random() * posts.length);
-      console.log("🚀 ~ file: app.ts:29 ~ getRandLine ~ rand", rand);
+      
       return posts[rand];
     }
     var randLine = getRandLine(results);
-    return randLine;
+    // console.log("🚀 ~ file: app.ts:35 ~ getRandPost ~ randLine", randLine)
+
+    // split randLine by |჻|
+    var randLineSplit = randLine.split("|჻|");
+
+    var name = randLineSplit[0];
+    var image = randLineSplit[1];
+    var text = randLineSplit[2] ?? `Image from ${name}`;
+
+    return [name, image, text];
   } catch (error) {
     return "error";
   }
@@ -95,11 +111,9 @@ async function generateImage(text: string) {
     if (randPost === "error") return getQuotes();
     // console.log("🚀 ~ file: app.ts:80 ~ randPost", randPost)
 
-    // split randPost by ||
-    var randPostSplit = randPost.split("||");
-    var randPostName = randPostSplit[0];
-    var randPostImage = randPostSplit[1];
-    var randPostText = randPostSplit[2] ?? `Image from ${randPostName}`;
+    // var randPostName = randPost[0];
+    var randPostImage = randPost[1];
+    var randPostText = randPost[2];
 
     console.log("🚀 randPostText", randPostText);
     // console.log(`from ${randPostName}, image url ${randPostImage}`);

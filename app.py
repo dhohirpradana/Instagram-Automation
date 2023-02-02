@@ -53,7 +53,7 @@ if rand_fb_type == "group":
             # save to txt file
             with open('results.txt', 'a', encoding="utf-8") as f:
                 if image:
-                    f.write(f"{g_name}||{image}||{text}\n")
+                    f.write(f"{g_name}|჻|{image}|჻|{text}ᴣᴣᴣ")
 
             # stop after 10 posts
             if i == 10:
@@ -76,7 +76,7 @@ elif rand_fb_type == "page":
             # save to txt file
             with open('results.txt', 'a', encoding="utf-8") as f:
                 if image:
-                    f.write(f"{p_name}||{image}||{text}\n")
+                    f.write(f"{p_name}|჻|{image}|჻|{text}ᴣᴣᴣ")
 
             # stop after 10 posts
             if i == 10:
@@ -97,7 +97,7 @@ elif rand_fb_type == "search":
             # save to txt file
             with open('results.txt', 'a', encoding="utf-8") as f:
                 if image:
-                    f.write(f"{search}||{image}||{text}\n")
+                    f.write(f"{search}|჻|{image}|჻|{text}ᴣᴣᴣ")
 
             # stop after 10 posts
             if i == 10:
