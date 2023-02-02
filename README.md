@@ -72,4 +72,6 @@ jobs:
 5. Save
 
 # Good Luck
+![alt text](https://github.com/dhohirpradana/Instagram-Automation/blob/master/actions.png?raw=true)
+
 [![Instagram Automation](https://github.com/dhohirpradana/Instagram-Automation/actions/workflows/node.yml/badge.svg)](https://github.com/dhohirpradana/Instagram-Automation/actions/workflows/node.yml)
