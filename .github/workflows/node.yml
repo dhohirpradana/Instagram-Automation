@@ -42,7 +42,8 @@ jobs:
           python app.py
           git config user.name dhohirpradana
           git config user.email dhohirkudus@gmail.com
-          git checkout -f master
+          git fetch origin
+          git reset --hard origin/master
           git pull
           git add results.txt
           git commit -m "results.txt changes"
