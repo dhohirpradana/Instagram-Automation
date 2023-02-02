@@ -44,7 +44,7 @@ if rand_fb_type == "group":
     g_name = g[1]
 
     try:
-        posts = get_posts(pages=3, group=g_id, cookies="cookies.json")
+        posts = get_posts(pages=1, group=g_id, cookies="cookies.json")
 
         for i, post in enumerate(posts):
             image = post['image']
@@ -67,7 +67,7 @@ elif rand_fb_type == "page":
     p_name = p[1]
 
     try:
-        posts = get_posts(p_id, pages=3, cookies="cookies.json")
+        posts = get_posts(p_id, pages=1, cookies="cookies.json")
 
         for i, post in enumerate(posts):
             image = post['image']
@@ -88,7 +88,7 @@ elif rand_fb_type == "search":
     search = "science"
 
     try:
-        posts = get_posts_by_search(search, pages=3, cookies="cookies.json")
+        posts = get_posts_by_search(search, pages=1, cookies="cookies.json")
 
         for i, post in enumerate(posts):
             image = post['image']
