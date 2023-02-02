@@ -23,9 +23,10 @@ set_cookies("cookies.json")
 time.sleep(2)
 
 # lawak science
-g_ids = [("4021832254535027", "Lawak Science")]
+g_ids = [("4021832254535027", "Lawak Science"),
+         ("728679554591625", "Shitposting Meme Universe"), ("emisid", "Meme Dakwah Kebutuhan Iman")]
 p_ids = [("ProgrammersCreateLife", "I am Programmer,I have no life."),
-         ("MemeAndRageComicIndonesia", "Meme & Rage Comic Indonesia")]
+         ("MemeAndRageComicIndonesia", "Meme & Rage Comic Indonesia"), ("mtsb.id", "Meme Troll Sepak Bola")]
 
 fb_type = ["group", "page"]
 # random fb_type
@@ -43,7 +44,7 @@ if rand_fb_type == "group":
     g_name = g[1]
 
     try:
-        posts = get_posts(pages=1, group=g_id, cookies="cookies.json")
+        posts = get_posts(pages=3, group=g_id, cookies="cookies.json")
 
         for i, post in enumerate(posts):
             image = post['image']
@@ -66,7 +67,7 @@ elif rand_fb_type == "page":
     p_name = p[1]
 
     try:
-        posts = get_posts(p_id, pages=1, cookies="cookies.json")
+        posts = get_posts(p_id, pages=3, cookies="cookies.json")
 
         for i, post in enumerate(posts):
             image = post['image']
@@ -116,4 +117,4 @@ elif rand_fb_type == "search":
         print(e)
 
 # options={
-#                           "posts_per_page": 5, "allow_extra_requests": False}, 
+#                           "posts_per_page": 5, "allow_extra_requests": False},
