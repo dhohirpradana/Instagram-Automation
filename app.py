@@ -55,7 +55,7 @@ if rand_fb_type == "group":
                 if image:
                     f.write(f"{g_name}|჻|{image}|჻|{text}ᴣᴣᴣ")
 
-            # stop after 10 posts
+            # stop after 10
             if i == 10:
                 break
     except Exception as e:
@@ -78,7 +78,7 @@ elif rand_fb_type == "page":
                 if image:
                     f.write(f"{p_name}|჻|{image}|჻|{text}ᴣᴣᴣ")
 
-            # stop after 10 posts
+            # stop after 10
             if i == 10:
                 break
     except Exception as e:
@@ -99,21 +99,9 @@ elif rand_fb_type == "search":
                 if image:
                     f.write(f"{search}|჻|{image}|჻|{text}ᴣᴣᴣ")
 
-            # stop after 10 posts
+            # stop after 10
             if i == 10:
                 break
 
-        # read results.txt
-        # try:
-        #     with open('results.txt', 'r', encoding="utf-8") as f:
-        #         # print(f.read())
-        #         # split by ||
-        #         for line in f:
-        #             print(line.split("||")[2])
-        # except Exception as e:
-        #     print(e)
-
     except Exception as e:
         print(e)
-
-# options={"posts_per_page": 5, "allow_extra_requests": False},
