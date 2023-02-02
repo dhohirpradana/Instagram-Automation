@@ -39,12 +39,13 @@ jobs:
           COOKIES: '${{ secrets.COOKIES }}'
         id: get-posts
         run: |
-          python app.py
+          rm results.txt
           git config user.name dhohirpradana
           git config user.email dhohirkudus@gmail.com
           git fetch origin
           git reset --hard origin/master
           git pull
+          python app.py
           git add results.txt
           git commit -m "results.txt changes"
           git push
