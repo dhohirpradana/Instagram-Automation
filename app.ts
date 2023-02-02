@@ -24,8 +24,10 @@ async function getRandPost() {
   const results = await fs.readFile("results.txt", "utf8");
   // get random line
   function getRandLine(text: any) {
-    var rand = Math.floor(Math.random() * text.split("\n").length);
-    return text.split("\n")[rand];
+    var posts = text.split("\n");
+    var rand = Math.floor(Math.random() * posts.length);
+    console.log("🚀 ~ file: app.ts:29 ~ getRandLine ~ rand", rand)
+    return posts[rand];
   }
   var randLine = getRandLine(results);
   return randLine;

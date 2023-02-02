@@ -9,10 +9,10 @@ cookies = os.environ.get("COOKIES", "")
 with open('cookies.json', 'w') as f:
     f.write(cookies)
     
-print("cookies.json created, wait 2 seconds...")
+# print("cookies.json created, wait 2 seconds...")
 time.sleep(2)
 
-print("Set user agent and cookies, wait 2 seconds...")
+# print("Set user agent and cookies, wait 2 seconds...")
 # set chrome user agent
 set_user_agent(
     "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)")
@@ -26,12 +26,12 @@ p_ids = [("ProgrammersCreateLife", "I am Programmer,I have no life.")]
 # group, page, search
 fb_type = ["group", "page"]
 
-print("Deleting results.txt...")
+# print("Deleting results.txt...")
 # delete file results.txt if exists
 if os.path.exists('results.txt'):
     os.remove('results.txt')
 
-print("Starting scraping...")
+# print("Starting scraping...")
 rand_fb_type = random.choice(fb_type)
 
 if rand_fb_type == "group":
