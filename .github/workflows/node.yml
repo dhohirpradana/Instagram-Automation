@@ -35,6 +35,8 @@ jobs:
         shell: bash
 
       - name: Run Python script
+        env:
+          COOKIES: '${{ secrets.COOKIES }}'
         id: get-posts
         run: python app.py
         shell: bash
