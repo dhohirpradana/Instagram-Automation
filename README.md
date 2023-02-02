@@ -27,12 +27,13 @@ name: Instagram Automation
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push events but only for the master branch
-  push:
-    branches: [ master ]
+  # push:
+  #   branches: [ master ]
   
   # Triggers the workflow with scheduler
   schedule:
     - cron: '0 17 * * *'
+    # - cron: '0 11 * * *'
     - cron: '0 05 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
@@ -44,11 +45,37 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      # Python
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install facebook-scrapper
+        run: pip install git+https://github.com/kevinzg/facebook-scraper.git
+        shell: bash
+
+      - name: Run Python script
+        env:
+          COOKIES: '${{ secrets.COOKIES }}'
+        id: get-posts
+        run: |
+          rm results.txt
+          git config user.name [github_username]
+          git config user.email [github_email]
+          git fetch origin
+          git reset --hard origin/master
+          git pull
+          python app.py
+          git add results.txt
+          git commit -m "results.txt changes"
+          git push
+        shell: bash
+
+      # NodeJS
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
