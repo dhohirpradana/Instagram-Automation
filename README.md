@@ -70,7 +70,6 @@ jobs:
 ```
 
 5. Save
-
 # Good Luck
 ![alt text](https://github.com/dhohirpradana/Instagram-Automation/blob/master/actions.png?raw=true)
 
