@@ -42,6 +42,7 @@ jobs:
           python app.py
           git config user.name dhohirpradana
           git config user.email dhohirkudus@gmail.com
+          git pull
           git add results.txt
           git commit -m "results.txt changes"
           git push
