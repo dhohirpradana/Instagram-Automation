@@ -131,7 +131,7 @@ async function generateImage(text: string) {
   const items = await feed.items();
   // console.log("🚀 ~ file: app.ts:117 ~ items", items)
 
-  var likeTimes = 5;
+  var likeTimes = 3;
   items.forEach(async (item) => {
     if (likeTimes === 0) return;
     await ig.media.like({
