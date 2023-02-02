@@ -21,16 +21,20 @@ async function login() {
 }
 
 async function getRandPost() {
-  const results = await fs.readFile("results.txt", "utf8");
-  // get random line
-  function getRandLine(text: any) {
-    var posts = text.split("\n");
-    var rand = Math.floor(Math.random() * posts.length);
-    console.log("🚀 ~ file: app.ts:29 ~ getRandLine ~ rand", rand)
-    return posts[rand];
+  try {
+    const results = await fs.readFile("results.txt", "utf8");
+    // get random line
+    function getRandLine(text: any) {
+      var posts = text.split("\n");
+      var rand = Math.floor(Math.random() * posts.length);
+      console.log("🚀 ~ file: app.ts:29 ~ getRandLine ~ rand", rand);
+      return posts[rand];
+    }
+    var randLine = getRandLine(results);
+    return randLine;
+  } catch (error) {
+    return "error";
   }
-  var randLine = getRandLine(results);
-  return randLine;
 }
 
 async function generateImage(text: string) {
@@ -64,33 +68,13 @@ async function generateImage(text: string) {
 
   var source = ["posts"];
   var randSource = source[Math.floor(Math.random() * source.length)];
-  console.log("🚀 ~ file: app.ts:65 ~ randSource", randSource)
+  console.log("🚀 ~ file: app.ts:65 ~ randSource", randSource);
 
   let imageBuffer: Buffer;
   let caption: string;
 
-  if (randSource === "posts") {
-    var randPost = await getRandPost();
-    // console.log("🚀 ~ file: app.ts:80 ~ randPost", randPost)
-
-    // split randPost by ||
-    var randPostSplit = randPost.split("||");
-    var randPostName = randPostSplit[0];
-    var randPostImage = randPostSplit[1];
-    var randPostText = randPostSplit[2] ?? `Image from ${randPostName}`;
-
-    console.log("🚀 ~ file: app.ts:82 ~ randPostText", randPostText)
-    // console.log(`from ${randPostName}, image url ${randPostImage}`);
-
-    caption = randPostText;
-
-    var randPostImageBuffer = await get({
-      url: randPostImage,
-      encoding: null,
-    });
-
-    imageBuffer = randPostImageBuffer;
-  } else {
+  async function getQuotes() {
+    console.log("🚀 Get Quotes");
     var quotes = await axios("https://api.api-ninjas.com/v1/quotes", {
       headers: {
         "X-Api-Key": process.env.QUOTES_API_KEY,
@@ -104,55 +88,98 @@ async function generateImage(text: string) {
     imageBuffer = await generateImage(quote + "\n\n" + author);
   }
 
-  try {
-    var publishPhoto = await ig.publish.photo({
-      file: imageBuffer,
-      caption: caption,
+  async function getPosts() {
+    console.log("🚀 Get Posts");
+    var randPost = await getRandPost();
+
+    if (randPost === "error") return getQuotes();
+    // console.log("🚀 ~ file: app.ts:80 ~ randPost", randPost)
+
+    // split randPost by ||
+    var randPostSplit = randPost.split("||");
+    var randPostName = randPostSplit[0];
+    var randPostImage = randPostSplit[1];
+    var randPostText = randPostSplit[2] ?? `Image from ${randPostName}`;
+
+    console.log("🚀 randPostText", randPostText);
+    // console.log(`from ${randPostName}, image url ${randPostImage}`);
+
+    caption = randPostText;
+
+    var randPostImageBuffer = await get({
+      url: randPostImage,
+      encoding: null,
     });
 
-    // delay for 5 seconds
-    await bluebird.delay(5000);
+    imageBuffer = randPostImageBuffer;
+  }
 
-    // like a publishPhoto
-    await ig.media.like({
-      mediaId: publishPhoto.media.id,
-      moduleInfo: {
-        module_name: "profile",
-        user_id: publishPhoto.media.user.pk,
-        username: publishPhoto.media.user.username,
-      },
-      d: 0,
+  if (randSource === "posts") {
+    getPosts().then(() => {
+      publishFeed();
     });
-  } catch (error) {
-    console.log("🚀 ~ file: app.ts:88 ~ error", error);
+  } else {
+    getQuotes().then(() => {
+      publishFeed();
+    });
+  }
+
+  async function publishFeed() {
+    console.log("🚀 Publish Feed");
+    try {
+      var publishPhoto = await ig.publish.photo({
+        file: imageBuffer,
+        caption: caption,
+      });
+
+      // delay for 5 seconds
+      await bluebird.delay(5000);
+
+      // like a publishPhoto
+      await ig.media.like({
+        mediaId: publishPhoto.media.id,
+        moduleInfo: {
+          module_name: "profile",
+          user_id: publishPhoto.media.user.pk,
+          username: publishPhoto.media.user.username,
+        },
+        d: 0,
+      });
+    } catch (error) {
+      console.log("🚀 ~ file: app.ts:88 ~ error", error);
+    }
   }
 
   // delay for 3 seconds
   await bluebird.delay(3000);
 
-  // like 5 user feed
-  const feed = ig.feed.timeline();
-  const items = await feed.items();
-  // console.log("🚀 ~ file: app.ts:117 ~ items", items)
+  try {
+    // like 5 user feed
+    const feed = ig.feed.timeline();
+    const items = await feed.items();
+    // console.log("🚀 ~ file: app.ts:117 ~ items", items)
 
-  var likeTimes = 3;
-  items.forEach(async (item) => {
-    if (likeTimes === 0) return;
-    await ig.media.like({
-      mediaId: item.id,
-      moduleInfo: {
-        module_name: "profile",
-        user_id: item.user.pk,
-        username: item.user.username,
-      },
-      d: 0,
+    var likeTimes = 3;
+    items.forEach(async (item) => {
+      if (likeTimes === 0) return;
+      await ig.media.like({
+        mediaId: item.id,
+        moduleInfo: {
+          module_name: "profile",
+          user_id: item.user.pk,
+          username: item.user.username,
+        },
+        d: 0,
+      });
+
+      // delay for random between 5 and 15 seconds
+      await bluebird.delay(Math.floor(Math.random() * 10 + 5) * 1000);
+
+      likeTimes--;
     });
-
-    // delay for random between 5 and 15 seconds
-    await bluebird.delay(Math.floor(Math.random() * 10 + 5) * 1000);
-
-    likeTimes--;
-  });
+  } catch (error) {
+    console.log("🚀 ~ file: app.ts:117 ~ error", error);
+  }
 })();
 
 // const unsplashAccessKey = process.env.UNSPLASH_ACCESS_KEY;
