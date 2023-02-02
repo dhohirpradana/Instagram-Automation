@@ -3,6 +3,7 @@ import bluebird from "bluebird";
 import { IgApiClient } from "instagram-private-api";
 import { UltimateTextToImage } from "ultimate-text-to-image";
 import { promises as fs } from "fs";
+import get from "request-promise";
 
 require("dotenv").config();
 
@@ -19,7 +20,7 @@ async function login() {
   // process.nextTick(async () => await ig.simulate.postLoginFlow());
 }
 
-async function getRandPost(){
+async function getRandPost() {
   const results = await fs.readFile("results.txt", "utf8");
   // get random line
   function getRandLine(text: any) {
@@ -58,53 +59,51 @@ async function generateImage(text: string) {
 
 (async () => {
   await login();
-  // const unsplashAccessKey = process.env.UNSPLASH_ACCESS_KEY;
 
-  // const photos = await axios(
-  //   "https://api.unsplash.com/photos/random?query=minimal",
-  //   {
-  //     headers: {
-  //       Authorization: `Client-ID ${unsplashAccessKey}`,
-  //     },
-  //   }
-  // );
+  var source = ["quotes", "posts"];
+  var randSource = source[Math.floor(Math.random() * source.length)];
 
-  // const data = photos.data;
-  // var photo = data;
-  // var user = photo.user;
-  // var username = user.username;
-  // var credit = `\nPhoto by ${username} on Unsplash`;
-  // var link = photo.urls.regular;
+  let imageBuffer: Buffer;
+  let caption: string;
 
-  var randPost = await getRandPost();
-  console.log("🚀 ~ file: app.ts:80 ~ randPost", randPost)
+  if (randSource === "posts") {
+    var randPost = await getRandPost();
+    // console.log("🚀 ~ file: app.ts:80 ~ randPost", randPost)
 
-  var quotes = await axios("https://api.api-ninjas.com/v1/quotes", {
-    headers: {
-      "X-Api-Key": process.env.QUOTES_API_KEY,
-    },
-  });
+    // split randPost by ||
+    var randPostSplit = randPost.split("||");
+    var randPostName = randPostSplit[0];
+    var randPostImage = randPostSplit[1];
 
-  var quote = quotes.data[0].quote;
-  var author = quotes.data[0].author;
+    console.log(`from ${randPostName}, image url ${randPostImage}`);
 
-  // const imageBuffer1 = await get({
-  //   url: link,
-  //   encoding: null,
-  // });
-  // console.log("🚀 ~ file: app.ts:79 ~ imageBuffer1", imageBuffer1);
+    caption = `Image from ${randPostName}`;
 
-  var imageBuffer = await generateImage(quote + "\n\n" + author);
+    var randPostImageBuffer = await get({
+      url: randPostImage,
+      encoding: null,
+    });
+
+    imageBuffer = randPostImageBuffer;
+  } else {
+    var quotes = await axios("https://api.api-ninjas.com/v1/quotes", {
+      headers: {
+        "X-Api-Key": process.env.QUOTES_API_KEY,
+      },
+    });
+
+    var quote = quotes.data[0].quote;
+    var author = quotes.data[0].author;
+    caption = quote + "\n" + author + "\n";
+
+    imageBuffer = await generateImage(quote + "\n\n" + author);
+  }
 
   try {
     var publishPhoto = await ig.publish.photo({
       file: imageBuffer,
-      caption: quote + "\n" + author + "\n",
+      caption: caption,
     });
-    // console.log(
-    //   "🚀 ~ file: index.js:49 ~ postToInsta ~ publistPhoto",
-    //   publishPhoto
-    // );
 
     // delay for 5 seconds
     await bluebird.delay(5000);
@@ -149,28 +148,46 @@ async function generateImage(text: string) {
 
     likeTimes--;
   });
-
-  // // share to story
-  // try {
-  //   const story = await ig.publish.story({
-  //     file: imageBuffer,
-  //     stickerConfig: new StickerBuilder()
-  //       .add(
-  //         StickerBuilder.hashtag({
-  //           tagName: "minimal",
-  //         }).center()
-  //       )
-  //       // .add(
-  //       //   StickerBuilder.attachmentFromMedia(
-  //       //     (
-  //       //       await ig.feed.timeline().items()
-  //       //     )[0]
-  //       //   ).center()
-  //       // )
-  //       .build(),
-  //   });
-  //   console.log("🚀 ~ file: app.ts:73 ~ story", story);
-  // } catch (error) {
-  //   console.log("🚀 ~ file: app.ts:88 ~ error", error);
-  // }
 })();
+
+// const unsplashAccessKey = process.env.UNSPLASH_ACCESS_KEY;
+
+// const photos = await axios(
+//   "https://api.unsplash.com/photos/random?query=minimal",
+//   {
+//     headers: {
+//       Authorization: `Client-ID ${unsplashAccessKey}`,
+//     },
+//   }
+// );
+
+// const data = photos.data;
+// var photo = data;
+// var user = photo.user;
+// var username = user.username;
+// var credit = `\nPhoto by ${username} on Unsplash`;
+// var link = photo.urls.regular;
+
+// // share to story
+// try {
+//   const story = await ig.publish.story({
+//     file: imageBuffer,
+//     stickerConfig: new StickerBuilder()
+//       .add(
+//         StickerBuilder.hashtag({
+//           tagName: "minimal",
+//         }).center()
+//       )
+//       // .add(
+//       //   StickerBuilder.attachmentFromMedia(
+//       //     (
+//       //       await ig.feed.timeline().items()
+//       //     )[0]
+//       //   ).center()
+//       // )
+//       .build(),
+//   });
+//   console.log("🚀 ~ file: app.ts:73 ~ story", story);
+// } catch (error) {
+//   console.log("🚀 ~ file: app.ts:88 ~ error", error);
+// }
