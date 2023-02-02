@@ -77,10 +77,12 @@ async function generateImage(text: string) {
     var randPostSplit = randPost.split("||");
     var randPostName = randPostSplit[0];
     var randPostImage = randPostSplit[1];
+    var randPostText = randPostSplit[2] ?? `Image from ${randPostName}`;
 
-    console.log(`from ${randPostName}, image url ${randPostImage}`);
+    console.log("🚀 ~ file: app.ts:82 ~ randPostText", randPostText)
+    // console.log(`from ${randPostName}, image url ${randPostImage}`);
 
-    caption = `Image from ${randPostName}`;
+    caption = randPostText;
 
     var randPostImageBuffer = await get({
       url: randPostImage,
