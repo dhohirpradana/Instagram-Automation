@@ -68,7 +68,7 @@ async function generateImage(text: string) {
 
   var source = ["posts"];
   var randSource = source[Math.floor(Math.random() * source.length)];
-  console.log("🚀 ~ file: app.ts:65 ~ randSource", randSource);
+  // console.log("🚀 ~ file: app.ts:65 ~ randSource", randSource);
 
   let imageBuffer: Buffer;
   let caption: string;
