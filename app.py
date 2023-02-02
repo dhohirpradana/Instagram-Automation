@@ -23,10 +23,22 @@ set_cookies("cookies.json")
 time.sleep(2)
 
 # lawak science
-g_ids = [("4021832254535027", "Lawak Science"),
-         ("728679554591625", "Shitposting Meme Universe"), ("emisid", "Meme Dakwah Kebutuhan Iman")]
-p_ids = [("ProgrammersCreateLife", "I am Programmer,I have no life."),
-         ("MemeAndRageComicIndonesia", "Meme & Rage Comic Indonesia"), ("mtsb.id", "Meme Troll Sepak Bola")]
+g_ids = [
+    ("4021832254535027", "Lawak Science"),
+    ("728679554591625", "Shitposting Meme Universe"),
+    ("emisid", "Meme Dakwah Kebutuhan Iman"),
+    ("1402557743444701", "Hujatan Teknologi Indonesia (HTI)"),
+    ("aicomunity", "ChatGPT"),
+]
+p_ids = [
+    ("ProgrammersCreateLife", "I am Programmer,I have no life."),
+    ("MemeAndRageComicIndonesia", "Meme & Rage Comic Indonesia"),
+    ("mtsb.id", "Meme Troll Sepak Bola"),
+    ("228102444674369", "Rakyat +62"),
+    ("StatusLucuOfficialPage", "Status Lucu"),
+    ("SarcasmLol", "Sarcasm"),
+    ("jokesvala", "Programmer Jokes"),
+]
 
 fb_type = ["group", "page"]
 # random fb_type
