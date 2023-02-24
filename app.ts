@@ -30,11 +30,11 @@ async function getRandPost() {
 
       // remove blank lines
       posts = posts.filter(function (el: string) {
-          return el != "";
+        return el != "";
       });
 
       var rand = Math.floor(Math.random() * posts.length);
-      
+
       return posts[rand];
     }
     var randLine = getRandLine(results);
@@ -45,7 +45,7 @@ async function getRandPost() {
 
     var name = randLineSplit[0];
     var image = randLineSplit[1];
-    var text = randLineSplit[2] ?? `Image from ${name}`;
+    var text = randLineSplit[2] != "" ? randLineSplit[2] : `Image from ${name}`;
 
     return [name, image, text];
   } catch (error) {
@@ -143,6 +143,7 @@ async function generateImage(text: string) {
     });
   }
 
+  publishFeedTry = 3;
   async function publishFeed() {
     console.log("🚀 Publish Feed");
     try {
@@ -166,6 +167,11 @@ async function generateImage(text: string) {
       });
     } catch (error) {
       console.log("🚀 ~ file: app.ts:88 ~ error", error);
+      if (publishFeedTry === 0) return;
+      getPosts().then(() => {
+        publishFeed();
+      });
+      publishFeedTry--;
     }
   }
 
