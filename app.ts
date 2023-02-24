@@ -143,7 +143,7 @@ async function generateImage(text: string) {
     });
   }
 
-  publishFeedTry = 3;
+  var publishFeedTry = 3;
   async function publishFeed() {
     console.log("🚀 Publish Feed");
     try {
