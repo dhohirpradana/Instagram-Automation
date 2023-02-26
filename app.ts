@@ -28,7 +28,7 @@ async function login() {
 }
 
     // get random line
-    function getRandLine(text: String) {
+    function getRandLine(text: string) {
       let posts = text.split("ᴣᴣᴣ");
 
       // remove blank lines

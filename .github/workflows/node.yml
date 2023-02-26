@@ -67,7 +67,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        
+
       - name: Run node script
         env:
           IG_USERNAME: '${{ secrets.IG_USERNAME }}'
