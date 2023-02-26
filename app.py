@@ -35,6 +35,7 @@ g_ids = [
     ("aicomunity", "ChatGPT"),
 ]
 p_ids = [
+    ("100063523938184", "The Cosmic Nightmare"),
     ("RandomOPScreenshots", "Random One Piece Screenshots"),
     ("idealistxavier", "Xavier"),
     ("pos.total", "Perkumpulan Orang Santai"),
