@@ -24,7 +24,7 @@ time.sleep(2)
 
 # lawak science
 g_ids = [
-    ("334775408669390", "Xavier Memes"),
+    ("334775408669390", "Xavier Memes"),("aicomunity", "ChatGPT Experts"),
     ("4021832254535027", "Lawak Science"),
     ("728679554591625", "Shitposting Meme Universe"),
     ("emisid", "Meme Dakwah Kebutuhan Iman"),
