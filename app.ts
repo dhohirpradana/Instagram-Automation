@@ -28,7 +28,7 @@ async function login() {
 }
 
     // get random line
-    function getRandLine(text: any) {
+    function getRandLine(text: String) {
       let posts = text.split("ᴣᴣᴣ");
 
       // remove blank lines
@@ -51,7 +51,7 @@ async function getRandPost() {
     const randLineSplit = randLine.split("|჻|");
 
     const name = randLineSplit[0];
-    let image = randLineSplit[1];
+    const image = randLineSplit[1];
     const text = randLineSplit[2] != "" ? randLineSplit[2] + `\nsource: ${name}` : `source: ${name}`;
 
     return [name, image, text];
@@ -104,7 +104,7 @@ async function generateImage(text: string) {
     });
 
     const quote = quotes.data[0].quote;
-    let author = quotes.data[0].author;
+    const author = quotes.data[0].author;
     caption = quote + "\n" + author + "\n";
 
     imageBuffer = await generateImage(quote + "\n\n" + author);
@@ -112,7 +112,7 @@ async function generateImage(text: string) {
 
   async function getPosts() {
     console.log("🚀 Get Posts");
-    let randPost = await getRandPost();
+    const randPost = await getRandPost();
 
     if (randPost === "error") {
       console.log("❌ Error getting posts");
@@ -122,8 +122,8 @@ async function generateImage(text: string) {
 
     console.log("✅ Get Posts Success");
 
-    let randPostImage = randPost[1];
-    let randPostText = randPost[2];
+    const randPostImage = randPost[1];
+    const randPostText = randPost[2];
 
     console.log("✅ Post Text", randPostText);
     console.log("✅ Source", randPost[0]);
@@ -132,7 +132,7 @@ async function generateImage(text: string) {
     caption = randPostText;
 
     try {
-      let randPostImageBuffer = await get({
+      const randPostImageBuffer = await get({
         url: randPostImage,
         encoding: null,
       });
@@ -158,7 +158,7 @@ async function generateImage(text: string) {
   async function publishFeed() {
     console.log("🚀 Publish Feed");
     try {
-      let publishPhoto = await ig.publish.photo({
+      const publishPhoto = await ig.publish.photo({
         file: imageBuffer,
         caption: caption,
       });
