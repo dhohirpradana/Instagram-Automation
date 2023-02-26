@@ -72,6 +72,6 @@ jobs:
         env:
           IG_USERNAME: '${{ secrets.IG_USERNAME }}'
           IG_PASSWORD: '${{ secrets.IG_PASSWORD }}'
-          UNSPLASH_ACCESS_KEY: '${{ secrets.UNSPLASH_ACCESS_KEY }}'
+          # UNSPLASH_ACCESS_KEY: '${{ secrets.UNSPLASH_ACCESS_KEY }}'
           QUOTES_API_KEY: '${{ secrets.QUOTES_API_KEY }}'
         run: ts-node app.ts

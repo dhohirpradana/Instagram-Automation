@@ -10,12 +10,19 @@ require("dotenv").config();
 const ig = new IgApiClient();
 
 async function login() {
+  console.log("🚀 Login");
   ig.state.generateDevice(process.env.IG_USERNAME ?? "");
   // await ig.simulate.preLoginFlow();
-  await ig.account.login(
-    process.env.IG_USERNAME ?? "",
-    process.env.IG_PASSWORD ?? ""
-  );
+  try {
+    await ig.account.login(
+      process.env.IG_USERNAME ?? "",
+      process.env.IG_PASSWORD ?? ""
+    );
+    console.log("✅ Login Success");
+
+  } catch (error) {
+    console.log("❌ Error login", error);
+  }
   // await ig.simulate.postLoginFlow();
   // process.nextTick(async () => await ig.simulate.postLoginFlow());
 }
@@ -38,7 +45,6 @@ async function getRandPost() {
       return posts[rand];
     }
     var randLine = getRandLine(results);
-    // console.log("🚀 ~ file: app.ts:35 ~ getRandPost ~ randLine", randLine)
 
     // split randLine by |჻|
     var randLineSplit = randLine.split("|჻|");
@@ -84,7 +90,6 @@ async function generateImage(text: string) {
 
   var source = ["posts"];
   var randSource = source[Math.floor(Math.random() * source.length)];
-  // console.log("🚀 ~ file: app.ts:65 ~ randSource", randSource);
 
   let imageBuffer: Buffer;
   let caption: string;
@@ -108,15 +113,20 @@ async function generateImage(text: string) {
     console.log("🚀 Get Posts");
     var randPost = await getRandPost();
 
-    if (randPost === "error") return getQuotes();
-    // console.log("🚀 ~ file: app.ts:80 ~ randPost", randPost)
+    if (randPost === "error") {
+      console.log("❌ Error getting posts");
+      console.log("🔄 Try to get quotes");
+      return getQuotes();
+    }
 
-    // var randPostName = randPost[0];
+    console.log("✅ Get Posts Success");
+
     var randPostImage = randPost[1];
     var randPostText = randPost[2];
 
-    console.log("🚀 randPostText", randPostText);
-    // console.log(`from ${randPostName}, image url ${randPostImage}`);
+    console.log("✅ Post Text", randPostText);
+    console.log("✅ Source", randPost[0]);
+
 
     caption = randPostText;
 
@@ -128,7 +138,7 @@ async function generateImage(text: string) {
 
       imageBuffer = randPostImageBuffer;
     } catch (error) {
-      console.log("🚀 ~ file: app.ts:117 ~ getPosts ~ error", error)
+      console.log("❌ Error getting image", error);
       return getQuotes();
     }
   }
@@ -152,22 +162,34 @@ async function generateImage(text: string) {
         caption: caption,
       });
 
-      // delay for 5 seconds
-      await bluebird.delay(5000);
+      console.log("✅ Publish Feed Success");
+
+      // delay for random 5 seconds
+      await bluebird.delay(Math.floor(Math.random() * 5000) + 5000);
 
       // like a publishPhoto
-      await ig.media.like({
-        mediaId: publishPhoto.media.id,
-        moduleInfo: {
-          module_name: "profile",
-          user_id: publishPhoto.media.user.pk,
-          username: publishPhoto.media.user.username,
-        },
-        d: 0,
-      });
+      try {
+        await ig.media.like({
+          mediaId: publishPhoto.media.id,
+          moduleInfo: {
+            module_name: "profile",
+            user_id: publishPhoto.media.user.pk,
+            username: publishPhoto.media.user.username,
+          },
+          d: 0,
+        });
+        console.log("✅ Like publish feed success");
+      } catch (error) {
+        console.log("❌ Error like publish feed", error);
+      }
+      
     } catch (error) {
-      console.log("🚀 ~ file: app.ts:88 ~ error", error);
-      if (publishFeedTry === 0) return;
+      console.log("❌ Error publish feed", error);
+
+      console.log("🔄 Try to get posts", publishFeedTry);
+
+      if (publishFeedTry === 0) return console.log("❌ Error publish feed after 3 times");
+
       getPosts().then(() => {
         publishFeed();
       });
@@ -175,18 +197,20 @@ async function generateImage(text: string) {
     }
   }
 
-  // delay for 3 seconds
-  await bluebird.delay(3000);
+  // delay for random 3 seconds
+  await bluebird.delay(Math.floor(Math.random() * 3000) + 3000);
+
+  // like 5 timeline feeds
+  console.log("🚀 Like Timeline Feeds 3 times");
+  var likeTimes = 3;
 
   try {
-    // like 5 user feed
     const feed = ig.feed.timeline();
     const items = await feed.items();
-    // console.log("🚀 ~ file: app.ts:117 ~ items", items)
 
-    var likeTimes = 3;
     items.forEach(async (item) => {
-      if (likeTimes === 0) return;
+      if (likeTimes === 0) return console.log("✅ Like Timeline Feeds 3 times finished");
+
       await ig.media.like({
         mediaId: item.id,
         moduleInfo: {
@@ -203,48 +227,6 @@ async function generateImage(text: string) {
       likeTimes--;
     });
   } catch (error) {
-    console.log("🚀 ~ file: app.ts:117 ~ error", error);
+    console.log("❌ Error get timeline feeds", error);
   }
 })();
-
-// const unsplashAccessKey = process.env.UNSPLASH_ACCESS_KEY;
-
-// const photos = await axios(
-//   "https://api.unsplash.com/photos/random?query=minimal",
-//   {
-//     headers: {
-//       Authorization: `Client-ID ${unsplashAccessKey}`,
-//     },
-//   }
-// );
-
-// const data = photos.data;
-// var photo = data;
-// var user = photo.user;
-// var username = user.username;
-// var credit = `\nPhoto by ${username} on Unsplash`;
-// var link = photo.urls.regular;
-
-// // share to story
-// try {
-//   const story = await ig.publish.story({
-//     file: imageBuffer,
-//     stickerConfig: new StickerBuilder()
-//       .add(
-//         StickerBuilder.hashtag({
-//           tagName: "minimal",
-//         }).center()
-//       )
-//       // .add(
-//       //   StickerBuilder.attachmentFromMedia(
-//       //     (
-//       //       await ig.feed.timeline().items()
-//       //     )[0]
-//       //   ).center()
-//       // )
-//       .build(),
-//   });
-//   console.log("🚀 ~ file: app.ts:73 ~ story", story);
-// } catch (error) {
-//   console.log("🚀 ~ file: app.ts:88 ~ error", error);
-// }
