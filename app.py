@@ -32,7 +32,7 @@ g_ids = [
     ("aicomunity", "ChatGPT"),
 ]
 p_ids = [
-    ("idealistxavier", "Xavier"),
+    ("idealistxavier", "Xavier"),("pos.total", "Perkumpulan Orang Santai"),
     ("StatusLucuOfficialPage", "Status Lucu"),
     ("animeme.ngakak.lovers", "Animeme Ngakak Lovers"),
     ("SpongebobSquarepants.137925052968299", "Cerita Konyol Patrick & SpongeBob (FunPage)"),
