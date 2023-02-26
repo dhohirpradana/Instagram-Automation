@@ -101,5 +101,4 @@ jobs:
 ![alt text](https://github.com/dhohirpradana/Instagram-Automation/blob/master/actions.png?raw=true)
 
 [![Instagram Automation](https://github.com/dhohirpradana/Instagram-Automation/actions/workflows/node.yml/badge.svg)](https://github.com/dhohirpradana/Instagram-Automation/actions/workflows/node.yml)
-
 [![CodeFactor](https://www.codefactor.io/repository/github/dhohirpradana/instagram-automation/badge)](https://www.codefactor.io/repository/github/dhohirpradana/instagram-automation)
