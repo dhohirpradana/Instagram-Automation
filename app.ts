@@ -27,31 +27,32 @@ async function login() {
   // process.nextTick(async () => await ig.simulate.postLoginFlow());
 }
 
-async function getRandPost() {
-  try {
-    const results = await fs.readFile("results.txt", "utf8");
-
     // get random line
     function getRandLine(text: any) {
-      var posts = text.split("ᴣᴣᴣ");
+      let posts = text.split("ᴣᴣᴣ");
 
       // remove blank lines
       posts = posts.filter(function (el: string) {
         return el != "";
       });
 
-      var rand = Math.floor(Math.random() * posts.length);
+      let rand = Math.floor(Math.random() * posts.length);
 
       return posts[rand];
     }
-    var randLine = getRandLine(results);
+
+async function getRandPost() {
+  try {
+    const results = await fs.readFile("results.txt", "utf8");
+
+    let randLine = getRandLine(results);
 
     // split randLine by |჻|
-    var randLineSplit = randLine.split("|჻|");
+    let randLineSplit = randLine.split("|჻|");
 
-    var name = randLineSplit[0];
-    var image = randLineSplit[1];
-    var text = randLineSplit[2] != "" ? randLineSplit[2] + `\nsource: ${name}` : `source: ${name}`;
+    let name = randLineSplit[0];
+    let image = randLineSplit[1];
+    let text = randLineSplit[2] != "" ? randLineSplit[2] + `\nsource: ${name}` : `source: ${name}`;
 
     return [name, image, text];
   } catch (error) {
@@ -88,22 +89,22 @@ async function generateImage(text: string) {
 (async () => {
   await login();
 
-  var source = ["posts"];
-  var randSource = source[Math.floor(Math.random() * source.length)];
+  let source = ["posts"];
+  let randSource = source[Math.floor(Math.random() * source.length)];
 
   let imageBuffer: Buffer;
   let caption: string;
 
   async function getQuotes() {
     console.log("🚀 Get Quotes");
-    var quotes = await axios("https://api.api-ninjas.com/v1/quotes", {
+    let quotes = await axios("https://api.api-ninjas.com/v1/quotes", {
       headers: {
         "X-Api-Key": process.env.QUOTES_API_KEY,
       },
     });
 
-    var quote = quotes.data[0].quote;
-    var author = quotes.data[0].author;
+    let quote = quotes.data[0].quote;
+    let author = quotes.data[0].author;
     caption = quote + "\n" + author + "\n";
 
     imageBuffer = await generateImage(quote + "\n\n" + author);
@@ -111,7 +112,7 @@ async function generateImage(text: string) {
 
   async function getPosts() {
     console.log("🚀 Get Posts");
-    var randPost = await getRandPost();
+    let randPost = await getRandPost();
 
     if (randPost === "error") {
       console.log("❌ Error getting posts");
@@ -121,8 +122,8 @@ async function generateImage(text: string) {
 
     console.log("✅ Get Posts Success");
 
-    var randPostImage = randPost[1];
-    var randPostText = randPost[2];
+    let randPostImage = randPost[1];
+    let randPostText = randPost[2];
 
     console.log("✅ Post Text", randPostText);
     console.log("✅ Source", randPost[0]);
@@ -131,7 +132,7 @@ async function generateImage(text: string) {
     caption = randPostText;
 
     try {
-      var randPostImageBuffer = await get({
+      let randPostImageBuffer = await get({
         url: randPostImage,
         encoding: null,
       });
@@ -153,11 +154,11 @@ async function generateImage(text: string) {
     });
   }
 
-  var publishFeedTry = 3;
+  let publishFeedTry = 3;
   async function publishFeed() {
     console.log("🚀 Publish Feed");
     try {
-      var publishPhoto = await ig.publish.photo({
+      let publishPhoto = await ig.publish.photo({
         file: imageBuffer,
         caption: caption,
       });
@@ -202,7 +203,7 @@ async function generateImage(text: string) {
 
   // like 5 timeline feeds
   console.log("🚀 Like Timeline Feeds 3 times");
-  var likeTimes = 3;
+  let likeTimes = 3;
 
   try {
     const feed = ig.feed.timeline();
