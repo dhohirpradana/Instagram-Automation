@@ -24,6 +24,7 @@ time.sleep(2)
 
 # lawak science
 g_ids = [
+    ("334775408669390", "Xavier Memes"),
     ("4021832254535027", "Lawak Science"),
     ("728679554591625", "Shitposting Meme Universe"),
     ("emisid", "Meme Dakwah Kebutuhan Iman"),
@@ -31,6 +32,12 @@ g_ids = [
     ("aicomunity", "ChatGPT"),
 ]
 p_ids = [
+    ("idealistxavier", "Xavier"),
+    ("StatusLucuOfficialPage", "Status Lucu"),
+    ("animeme.ngakak.lovers", "Animeme Ngakak Lovers"),
+    ("SpongebobSquarepants.137925052968299", "Cerita Konyol Patrick & SpongeBob (FunPage)"),
+    ("k.harianmemerandom", "Kesegaran Harian Meme Random"),
+    ("KeluhKesahKehidupanBerTeknologi", "Keluh Kesah Kehidupan Ber Teknologi"),
     ("ProgrammersCreateLife", "I am Programmer,I have no life."),
     ("MemeAndRageComicIndonesia", "Meme & Rage Comic Indonesia"),
     ("mtsb.id", "Meme Troll Sepak Bola"),

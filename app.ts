@@ -45,7 +45,7 @@ async function getRandPost() {
 
     var name = randLineSplit[0];
     var image = randLineSplit[1];
-    var text = randLineSplit[2] != "" ? randLineSplit[2] : `Image from ${name}`;
+    var text = randLineSplit[2] != "" ? randLineSplit[2] + `\nsource: ${name}` : `source: ${name}`;
 
     return [name, image, text];
   } catch (error) {
