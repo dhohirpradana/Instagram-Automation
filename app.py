@@ -22,8 +22,8 @@ set_user_agent(
 set_cookies("cookies.json")
 time.sleep(2)
 
-# lawak science
 g_ids = [
+    ("himputek", "Himpunan Teknologi 🇮🇩"),
     ("771918063464559", "Shitmeme untuk kebutuhan Wibu"),
     ("224128411252915", "Quotes"),
     ("334775408669390", "Xavier Memes"),
@@ -56,12 +56,12 @@ p_ids = [
 ]
 
 fb_type = ["group", "page"]
-# random fb_type
 
 # delete file results.txt if exists
 if os.path.exists('results.txt'):
     os.remove('results.txt')
 
+# rand group or page
 rand_fb_type = random.choice(fb_type)
 print('rand_fb_type: ', rand_fb_type)
 
