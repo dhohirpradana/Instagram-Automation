@@ -36,7 +36,7 @@ async function login() {
         return el != "";
       });
 
-      let rand = Math.floor(Math.random() * posts.length);
+      const rand = Math.floor(Math.random() * posts.length);
 
       return posts[rand];
     }
@@ -45,14 +45,14 @@ async function getRandPost() {
   try {
     const results = await fs.readFile("results.txt", "utf8");
 
-    let randLine = getRandLine(results);
+    const randLine = getRandLine(results);
 
     // split randLine by |჻|
-    let randLineSplit = randLine.split("|჻|");
+    const randLineSplit = randLine.split("|჻|");
 
-    let name = randLineSplit[0];
+    const name = randLineSplit[0];
     let image = randLineSplit[1];
-    let text = randLineSplit[2] != "" ? randLineSplit[2] + `\nsource: ${name}` : `source: ${name}`;
+    const text = randLineSplit[2] != "" ? randLineSplit[2] + `\nsource: ${name}` : `source: ${name}`;
 
     return [name, image, text];
   } catch (error) {
@@ -89,21 +89,21 @@ async function generateImage(text: string) {
 (async () => {
   await login();
 
-  let source = ["posts"];
-  let randSource = source[Math.floor(Math.random() * source.length)];
+  const source = ["posts"];
+  const randSource = source[Math.floor(Math.random() * source.length)];
 
   let imageBuffer: Buffer;
   let caption: string;
 
   async function getQuotes() {
     console.log("🚀 Get Quotes");
-    let quotes = await axios("https://api.api-ninjas.com/v1/quotes", {
+    const quotes = await axios("https://api.api-ninjas.com/v1/quotes", {
       headers: {
         "X-Api-Key": process.env.QUOTES_API_KEY,
       },
     });
 
-    let quote = quotes.data[0].quote;
+    const quote = quotes.data[0].quote;
     let author = quotes.data[0].author;
     caption = quote + "\n" + author + "\n";
 
