@@ -27,19 +27,19 @@ async function login() {
   // process.nextTick(async () => await ig.simulate.postLoginFlow());
 }
 
-    // get random line
-    function getRandLine(text: string) {
-      let posts = text.split("ᴣᴣᴣ");
+// get random line
+function getRandLine(text: string) {
+  let posts = text.split("ᴣᴣᴣ");
 
-      // remove blank lines
-      posts = posts.filter(function (el: string) {
-        return el != "";
-      });
+  // remove blank lines
+  posts = posts.filter(function (el: string) {
+    return el != "";
+  });
 
-      const rand = Math.floor(Math.random() * posts.length);
+  const rand = Math.floor(Math.random() * posts.length);
 
-      return posts[rand];
-    }
+  return posts[rand];
+}
 
 async function getRandPost() {
   try {
@@ -203,14 +203,18 @@ async function generateImage(text: string) {
 
       // share a publishPhoto to story
       try {
-        await ig.media.configureToStory({
-          mediaId: publishPhoto.media.id,
-        });
+        await ig.media.configureToStory(
+          {
+            upload_id: publishPhoto.media.id,
+            caption: caption,
+            configure_mode: "1",
+          }
+        );
         console.log("✅ Share publish feed to story success");
       } catch (error) {
         console.log("❌ Error share publish feed to story", error);
       }
-      
+
     } catch (error) {
       console.log("❌ Error publish feed", error);
 
