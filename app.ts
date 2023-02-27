@@ -165,8 +165,8 @@ async function generateImage(text: string) {
 
       console.log("✅ Publish Feed Success");
 
-      // delay for random 5 seconds
-      await bluebird.delay(Math.floor(Math.random() * 5000) + 5000);
+      // delay for random 3 seconds
+      await bluebird.delay(Math.floor(Math.random() * 3000) + 3000);
 
       // like a publishPhoto
       try {
@@ -182,6 +182,33 @@ async function generateImage(text: string) {
         console.log("✅ Like publish feed success");
       } catch (error) {
         console.log("❌ Error like publish feed", error);
+      }
+
+      // delay for random 3 seconds
+      await bluebird.delay(Math.floor(Math.random() * 3000) + 3000);
+
+      // comment a publishPhoto
+      try {
+        await ig.media.comment({
+          mediaId: publishPhoto.media.id,
+          text: "👍",
+        });
+        console.log("✅ Comment publish feed success");
+      } catch (error) {
+        console.log("❌ Error comment publish feed", error);
+      }
+
+      // delay for random 3 seconds
+      await bluebird.delay(Math.floor(Math.random() * 3000) + 3000);
+
+      // share a publishPhoto to story
+      try {
+        await ig.media.configureToStory({
+          mediaId: publishPhoto.media.id,
+        });
+        console.log("✅ Share publish feed to story success");
+      } catch (error) {
+        console.log("❌ Error share publish feed to story", error);
       }
       
     } catch (error) {
