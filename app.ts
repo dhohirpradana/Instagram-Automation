@@ -4,7 +4,7 @@ import { IgApiClient } from "instagram-private-api";
 import { UltimateTextToImage } from "ultimate-text-to-image";
 import { promises as fs } from "fs";
 import get from "request-promise";
-import translate from "translate-google";
+const translateGoogle = require("translate-google");
 
 // import {instagramIdToUrlSegment, urlSegmentToInstagramId} from "instagram-id-to-url-segment"
 
@@ -113,6 +113,47 @@ async function generateImage(text: string) {
     imageBuffer = await generateImage(quote + "\n\n" + author);
   }
 
+  async function translateToID(text: string) {
+    const randQuoteTextIndo = await translateGoogle(text, { to: "id" });
+    const caption = randQuoteTextIndo;
+    return caption;
+  }
+
+  // Get quotes
+  async function getQuotes1() {
+    const quotesApiUrl = "https://type.fit/api/quotes";
+    let quote: string;
+
+    try {
+      console.log("🚀 Get Quotes");
+
+      const quotes = await axios(quotesApiUrl);
+      const randQuote = quotes.data[Math.floor(Math.random() * quotes.data.length)];
+
+      const randQuoteText = randQuote.text;
+
+      console.log("✅ Get Quotes Success");
+
+      try {
+        console.log("🚀 Translate Quotes");
+        const randQuoteTextIndo = await translateToID(randQuoteText);
+        console.log("✅ Translate Quotes Success");
+        console.log("Translated Quotes", randQuoteTextIndo);
+        quote = randQuoteTextIndo;
+      } catch (error) {
+        console.log("❌ Error translating quotes", error);
+        quote = randQuoteText;
+      }
+    } catch (error) {
+      console.log("❌ Error getting quotes", error);
+      console.log("🔄 Use default quote");
+
+      quote = "Semoga hari ini kamu bahagia";
+    }
+
+    return quote;
+  }
+
   async function getPosts() {
     console.log("🚀 Get Posts");
     const randPost = await getRandPost();
@@ -190,31 +231,16 @@ async function generateImage(text: string) {
       // Get quotes
       const quotesApiUrl = "https://type.fit/api/quotes";
       let quote: string;
-      
+
       try {
-        console.log("🚀 Get Quotes");
-        
-        const quotes = await axios(quotesApiUrl);
-        const randQuote = quotes.data[Math.floor(Math.random() * quotes.data.length)];
-
-        const randQuoteText = randQuote.text;
-
-        console.log("✅ Get Quotes Success");
-        console.log("🚀 Translate Quotes");
-        
-        const randQuoteTextIndo = await translate(randQuoteText, { to: "id" });
-
-        console.log("✅ Translate Quotes Success");
-        console.log("Translated Quotes", randQuoteTextIndo.text);
-
-        quote = randQuoteTextIndo.text;
+        quote = await getQuotes1();
       } catch (error) {
         console.log("❌ Error getting quotes", error);
         console.log("🔄 Use default quote");
 
         quote = "Semoga hari ini kamu bahagia";
       }
-      
+
       // delay for random 3 seconds
       await bluebird.delay(Math.floor(Math.random() * 3000) + 3000);
 
@@ -278,17 +304,18 @@ async function generateImage(text: string) {
   // delay for random 3 seconds
   await bluebird.delay(Math.floor(Math.random() * 3000) + 3000);
 
-  // like 5 timeline feeds
+  // like and comment 3 timeline feeds
   console.log("🚀 Like Timeline Feeds 3 times");
-  let likeTimes = 3;
+  let likeNcommentTimes = 3;
 
   try {
     const feed = ig.feed.timeline();
     const items = await feed.items();
 
     items.forEach(async (item) => {
-      if (likeTimes === 0) return console.log("✅ Like Timeline Feeds 3 times finished");
+      if (likeNcommentTimes === 0) return console.log("✅ Like Timeline Feeds 3 times finished");
 
+      // like a timeline feed
       await ig.media.like({
         mediaId: item.id,
         moduleInfo: {
@@ -299,10 +326,18 @@ async function generateImage(text: string) {
         d: 0,
       });
 
+      // comment a timeline feed
+      const comment = await getQuotes1();
+
+      await ig.media.comment({
+        mediaId: item.id,
+        text: comment,
+      });
+
       // delay for random between 5 and 15 seconds
       await bluebird.delay(Math.floor(Math.random() * 10 + 5) * 1000);
 
-      likeTimes--;
+      likeNcommentTimes--;
     });
   } catch (error) {
     console.log("❌ Error get timeline feeds", error);
