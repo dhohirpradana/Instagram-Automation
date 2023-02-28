@@ -13,6 +13,7 @@
     "axios": "^1.2.2",
     "bluebird": "^3.7.2",
     "dotenv": "^16.0.3",
+    "instagram-id-to-url-segment": "^0.0.0",
     "instagram-private-api": "^1.45.3",
     "ultimate-text-to-image": "^1.0.1"
   },

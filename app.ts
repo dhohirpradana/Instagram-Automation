@@ -5,6 +5,8 @@ import { UltimateTextToImage } from "ultimate-text-to-image";
 import { promises as fs } from "fs";
 import get from "request-promise";
 
+// import {instagramIdToUrlSegment, urlSegmentToInstagramId} from "instagram-id-to-url-segment"
+
 require("dotenv").config();
 
 const ig = new IgApiClient();
@@ -203,13 +205,28 @@ async function generateImage(text: string) {
 
       // share a publishPhoto to story
       try {
-        await ig.media.configureToStory(
-          {
-            upload_id: publishPhoto.media.id,
-            caption: caption,
-            configure_mode: "1",
-          }
-        );
+        // await ig.media.configureToStory(
+        //   {
+        //     upload_id: publishPhoto.media.id,
+        //     caption: caption,
+        //     configure_mode: "1",
+        //   }
+        // );
+
+        ig.publish.story({
+          file: imageBuffer,
+          caption: caption,
+          media: {
+            media_id: publishPhoto.media.id,
+            x: 1,
+            y: 1,
+            width: 1,
+            height: 1,
+            rotation: 0,
+            is_sticker: false,
+          },
+        });
+
         console.log("✅ Share publish feed to story success");
       } catch (error) {
         console.log("❌ Error share publish feed to story", error);
