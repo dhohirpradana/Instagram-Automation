@@ -4,6 +4,7 @@ import { IgApiClient } from "instagram-private-api";
 import { UltimateTextToImage } from "ultimate-text-to-image";
 import { promises as fs } from "fs";
 import get from "request-promise";
+import translate from "translate-google";
 
 // import {instagramIdToUrlSegment, urlSegmentToInstagramId} from "instagram-id-to-url-segment"
 
@@ -186,6 +187,34 @@ async function generateImage(text: string) {
         console.log("❌ Error like publish feed", error);
       }
 
+      // Get quotes
+      const quotesApiUrl = "https://type.fit/api/quotes";
+      let quote: string;
+      
+      try {
+        console.log("🚀 Get Quotes");
+        
+        const quotes = await axios(quotesApiUrl);
+        const randQuote = quotes.data[Math.floor(Math.random() * quotes.data.length)];
+
+        const randQuoteText = randQuote.text;
+
+        console.log("✅ Get Quotes Success");
+        console.log("🚀 Translate Quotes");
+        
+        const randQuoteTextIndo = await translate(randQuoteText, { to: "id" });
+
+        console.log("✅ Translate Quotes Success");
+        console.log("Translated Quotes", randQuoteTextIndo.text);
+
+        quote = randQuoteTextIndo.text;
+      } catch (error) {
+        console.log("❌ Error getting quotes", error);
+        console.log("🔄 Use default quote");
+
+        quote = "Semoga hari ini kamu bahagia";
+      }
+      
       // delay for random 3 seconds
       await bluebird.delay(Math.floor(Math.random() * 3000) + 3000);
 
@@ -193,7 +222,7 @@ async function generateImage(text: string) {
       try {
         await ig.media.comment({
           mediaId: publishPhoto.media.id,
-          text: "👍",
+          text: quote,
         });
         console.log("✅ Comment publish feed success");
       } catch (error) {
