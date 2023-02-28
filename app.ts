@@ -201,10 +201,10 @@ async function generateImage(text: string) {
       }
 
       // delay for random 3 seconds
-      // await bluebird.delay(Math.floor(Math.random() * 3000) + 3000);
+      await bluebird.delay(Math.floor(Math.random() * 3000) + 3000);
 
       // share a publishPhoto to story
-      // try {
+      try {
       //   // await ig.media.configureToStory(
       //   //   {
       //   //     upload_id: publishPhoto.media.id,
@@ -213,24 +213,24 @@ async function generateImage(text: string) {
       //   //   }
       //   // );
 
-      //   ig.publish.story({
-      //     file: imageBuffer,
-      //     caption: caption,
-      //     media: {
-      //       media_id: publishPhoto.media.id,
-      //       x: 1,
-      //       y: 1,
-      //       width: 1,
-      //       height: 1,
-      //       rotation: 0,
-      //       is_sticker: false,
-      //     },
-      //   });
+        ig.publish.story({
+          file: imageBuffer,
+          caption: caption,
+          media: {
+            media_id: publishPhoto.media.id,
+            x: 1,
+            y: 1,
+            width: 1,
+            height: 1,
+            rotation: 0,
+            is_sticker: false,
+          },
+        });
 
-      //   console.log("✅ Share publish feed to story success");
-      // } catch (error) {
-      //   console.log("❌ Error share publish feed to story", error);
-      // }
+        console.log("✅ Share publish feed to story success");
+      } catch (error) {
+        console.log("❌ Error share publish feed to story", error);
+      }
 
     } catch (error) {
       console.log("❌ Error publish feed", error);
