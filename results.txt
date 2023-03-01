@@ -1,21 +1,15 @@
-Perkumpulan Orang Santai|჻|https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/333328286_3513161882247388_7602272720677452266_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=104&ccb=1-7&_nc_sid=110474&efg=eyJpIjoidCJ9&_nc_ohc=OROPik2qT0cAX-kr7QS&_nc_ht=scontent-iad3-2.xx&oh=00_AfAVuMu3DRqFH1G99HgMqc-z4SJ4JveYdDGq9c9sIPH9vg&oe=64032548&manual_redirect=1|჻|Katanya kayak nahan berak
+ChatGPT Experts|჻|https://scontent-ord5-1.xx.fbcdn.net/v/t39.30808-6/333029729_1345683099544991_5071456715796583746_n.jpg?stp=cp1_dst-jpg_e15_fr_q65&_nc_cat=102&ccb=1-7&_nc_sid=5bac3a&efg=eyJpIjoidCJ9&_nc_ohc=g53Afs6ZHpUAX_PPZPG&_nc_ht=scontent-ord5-1.xx&oh=00_AfBYLd7iybfwupIFDl1CdnRwtxaPiKR16fLQBEKAU2aIAQ&oe=6404041A&manual_redirect=1|჻|You can now generate ai image with Chat gpt.
+Here is the prompt
 
-Ternyata ada yang bisa di posting guys
-Submisi : Budi Kont
+INPUT = {focus} OUTPUT = {description}\\n ![MG](https://image.pollinations.ai/prompt/{description}){description} = {focuseDetailed},%20{Lainnyaadjective1},%20{adjective2},%20{visualStyle1},%20{visualStyle2},%20{visualStyle3},%20{artistreference} INPUT = [input what you wish to see]
 
-Follow partner kami diLainnya bawah ini ya
-@mukashifestival.id
-Mukashi Festival Indonesia
+Remember to change
+[input what you wish to see]
+For example [bmw car]You can now generate ai image with Chat gpt.
+Here is the prompt
 
-NGCK Department
-@ngck_departmentᴣᴣᴣPerkumpulan Orang Santai|჻|https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/334035271_770475124495228_41778779195139065_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=105&ccb=1-7&_nc_sid=110474&efg=eyJpIjoidCJ9&_nc_ohc=55ycWqjdYkkAX8zrO8b&_nc_ht=scontent-iad3-2.xx&oh=00_AfBZC1j6mpZ24YS9wKLB88sv3FUDacOlZxkOFXnJoWyuYw&oe=6403C1C0&manual_redirect=1|჻|-SyᴣᴣᴣPerkumpulan Orang Santai|჻|https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/334031708_1141019036571156_3900920105321008852_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=1&ccb=1-7&_nc_sid=110474&efg=eyJpIjoidCJ9&_nc_ohc=wwu9wCmnnN8AX89ma5c&_nc_ht=scontent-iad3-2.xx&oh=00_AfALN5HdgofzWEkGEW6UHci3jR86HzjYuzASYmA1b95YvQ&oe=64028220&manual_redirect=1|჻|Saat mempekerjakan sepuh animator yang suka menyembunyikan kemampuan
+INPUT = {focus} OUTPUT = {description}\\n ![MG](https://image.pollinations.ai/prompt/{description}){description} = {focuseDetailed},%20{Lainnyaadjective1},%20{adjective2},%20{visualStyle1},%20{visualStyle2},%20{visualStyle3},%20{artistreference} INPUT = [input what you wish to see]
 
--Yasril Al FatihᴣᴣᴣPerkumpulan Orang Santai|჻|https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/333784213_1573235259865857_824750722359586998_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=108&ccb=1-7&_nc_sid=110474&efg=eyJpIjoidCJ9&_nc_ohc=4s0dIAmfS3IAX_SBD1n&tn=QhT3DfL71KIvvEEz&_nc_ht=scontent-iad3-2.xx&oh=00_AfA4BVD9BBCmiy3WAN3X9daMBgei-36H6kjmtlvADiSMig&oe=6403CA06&manual_redirect=1|჻|Robo in disguise
-
--Jakwan BagungᴣᴣᴣPerkumpulan Orang Santai|჻|https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/333990305_1355690028557418_3779864810322521138_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=111&ccb=1-7&_nc_sid=8024bb&efg=eyJpIjoidCJ9&_nc_ohc=QHdbEo0gJj4AX_xp14a&_nc_ht=scontent-iad3-2.xx&oh=00_AfDRt5csYzolxTJli5tOcQQzzZoS5wUdE3MtMsgRwBa81w&oe=6402D9A7&manual_redirect=1|჻|-YonzᴣᴣᴣPerkumpulan Orang Santai|჻|https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/333986698_928237215257508_4347240692415428508_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=104&ccb=1-7&_nc_sid=110474&efg=eyJpIjoidCJ9&_nc_ohc=FvuSrJg6gLcAX_cWbNd&_nc_ht=scontent-iad3-2.xx&oh=00_AfAygNLWaLISfRgnXecWlnE5V93Hgb35TgxCg_dn2jVH6g&oe=6403B226&manual_redirect=1|჻|Jadi api biru
-
--Abi ZarᴣᴣᴣPerkumpulan Orang Santai|჻|https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/333176828_873584307277495_472049540355249370_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=101&ccb=1-7&_nc_sid=110474&efg=eyJpIjoidCJ9&_nc_ohc=LZt1cDHNLnIAX8tEmYe&_nc_ht=scontent-iad3-2.xx&oh=00_AfCygLeGqR-Cw5yPllBuNwByhaR6ggs__M9Je1Uq8Q3E9Q&oe=6402F4AD&manual_redirect=1|჻|Lagi santai-santai eh..
-
--DarealardyyᴣᴣᴣPerkumpulan Orang Santai|჻|https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/333224604_139411759040718_4413306500406840842_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=104&ccb=1-7&_nc_sid=110474&efg=eyJpIjoidCJ9&_nc_ohc=qg98I6JEu2IAX-Q_ydN&_nc_ht=scontent-iad3-2.xx&oh=00_AfARcJb-9M7BFfLGv9v7_AJCXswhQchodqLuJMg_79isGg&oe=64042158&manual_redirect=1|჻|Nanti sya ganti
-
--Sleep EgineᴣᴣᴣPerkumpulan Orang Santai|჻|https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/333299817_898731194684303_2748587295339291381_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=102&ccb=1-7&_nc_sid=110474&efg=eyJpIjoidCJ9&_nc_ohc=1Qh7w994T6kAX_96Xy-&_nc_ht=scontent-iad3-2.xx&oh=00_AfD-Rj0hV3m7ObN0ATBHyD4ACMjMHq32XCjvGZ85yxCvsw&oe=6402AC5C&manual_redirect=1|჻|-Syᴣᴣᴣ
+Remember to change
+[input what you wish to see]
+For example [bmw car]ᴣᴣᴣChatGPT Experts|჻|https://scontent-ord5-1.xx.fbcdn.net/v/t39.30808-6/334068860_906398347170684_7519807548741426520_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=105&ccb=1-7&_nc_sid=5bac3a&efg=eyJpIjoidCJ9&_nc_ohc=d7WkYVjDHz4AX-ftzJN&tn=QhT3DfL71KIvvEEz&_nc_ht=scontent-ord5-1.xx&oh=00_AfDg3v70_pJCEBD8XoXurUNdFMct3FQ3zIN-um0a9N69sw&oe=64030C5E&manual_redirect=1|჻|Today and yesterday I've not been able to get into ChatGPT. The furthest I get is the blank screen that you see. Any ideas as to what I need to do to fix this? Thanks!ᴣᴣᴣ
