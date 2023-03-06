@@ -98,6 +98,7 @@ async function generateImage(text: string) {
 
   let imageBuffer: Buffer;
   let caption: string;
+  let hashtags: string;
 
   async function getQuotes() {
     console.log("🚀 Get Quotes");
@@ -176,6 +177,7 @@ async function generateImage(text: string) {
 
 
     caption = randPostText;
+    hashtags = randPostHashtags;
 
     try {
       const randPostImageBuffer = await get({
