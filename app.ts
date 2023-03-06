@@ -198,13 +198,13 @@ async function generateImage(text: string) {
     });
   }
 
-  let publishFeedTry = 3;
+  let publishFeedTry = 7;
   async function publishFeed() {
     console.log("🚀 Publish Feed");
     try {
       const publishPhoto = await ig.publish.photo({
         file: imageBuffer,
-        caption: caption,
+        caption: caption + "\n\n#viralindonesia #instagood #indonesia #viral #viralindo #repost #fun #photo #instalike #follow #like #instadaily #instafollow",
       });
 
       console.log("✅ Publish Feed Success");
@@ -292,7 +292,7 @@ async function generateImage(text: string) {
 
       console.log("🔄 Try to get posts", publishFeedTry);
 
-      if (publishFeedTry === 0) return console.log("❌ Error publish feed after 3 times");
+      if (publishFeedTry === 0) return console.log("❌ Error publish feed after 7 times");
 
       getPosts().then(() => {
         publishFeed();
