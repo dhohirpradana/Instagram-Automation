@@ -319,6 +319,8 @@ async function generateImage(text: string) {
     items.forEach(async (item) => {
       if (likeNcommentTimes === 0) return console.log("✅ Like Timeline Feeds 5 times finished");
 
+      if (item.user.pk === ig.state.cookieUserId) return console.log("🔄 Skip own timeline feed");
+
       // like a timeline feed
       await ig.media.like({
         mediaId: item.id,
