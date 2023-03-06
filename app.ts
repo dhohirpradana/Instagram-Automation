@@ -56,8 +56,9 @@ async function getRandPost() {
     const name = randLineSplit[0];
     const image = randLineSplit[1];
     const text = randLineSplit[2] != "" ? randLineSplit[2] + `\nsource: ${name}` : `source: ${name}`;
+    const hashtags = randLineSplit[3];
 
-    return [name, image, text];
+    return [name, image, text, hashtags];
   } catch (error) {
     return "error";
   }
@@ -168,6 +169,7 @@ async function generateImage(text: string) {
 
     const randPostImage = randPost[1];
     const randPostText = randPost[2];
+    const randPostHashtags = randPost[3];
 
     console.log("✅ Post Text", randPostText);
     console.log("✅ Source", randPost[0]);
@@ -204,7 +206,7 @@ async function generateImage(text: string) {
     try {
       const publishPhoto = await ig.publish.photo({
         file: imageBuffer,
-        caption: caption + "\n\n#viralindonesia #instagood #indonesia #viral #viralindo #repost #fun #photo #instalike #follow #like #instadaily #instafollow",
+        caption: caption + "\n\n" + hashtags,
       });
 
       console.log("✅ Publish Feed Success");
