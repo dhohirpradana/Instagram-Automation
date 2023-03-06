@@ -72,7 +72,7 @@ if rand_fb_type == "group":
     g_hashtags = g[2]
 
     try:
-        posts = get_posts(pages=1, group=g_id, sleep=5)
+        posts = get_posts(pages=3, group=g_id, sleep=5)
 
         for i, post in enumerate(posts):
             image = post['image']
@@ -96,7 +96,7 @@ elif rand_fb_type == "page":
     p_hashtags = p[2]
 
     try:
-        posts = get_posts(p_id, pages=1, sleep=5)
+        posts = get_posts(p_id, pages=3, sleep=5)
 
         for i, post in enumerate(posts):
             image = post['image']
@@ -117,7 +117,7 @@ elif rand_fb_type == "search":
     search = "science"
 
     try:
-        posts = get_posts_by_search(search, pages=1, sleep=5)
+        posts = get_posts_by_search(search, pages=3, sleep=5)
 
         for i, post in enumerate(posts):
             image = post['image']
