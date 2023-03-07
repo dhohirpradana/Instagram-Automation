@@ -47,6 +47,9 @@ async function login() {
 
     const quote = quotes.data[0].quote;
     const translateQuote = await translateToID(quote);
+
+    console.log("✅ Get Quotes Success", translateQuote);
+    
     return translateQuote;
   }
 
@@ -81,6 +84,8 @@ async function login() {
         mediaId: item.id,
         text: comment,
       });
+
+      console.log("✅ Like and Comment Timeline Feeds Success " + likeNcommentTimes);
 
       // delay for random between 5 and 15 seconds
       await bluebird.delay(Math.floor(Math.random() * 10 + 5) * 1000);
