@@ -8,8 +8,8 @@ on:
 
   # Triggers the workflow with scheduler
   schedule:
-    # every 1 hour
-    - cron: '0 * * * *'
+    # every 3 hour
+    - cron: '0 */3 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
