@@ -308,16 +308,16 @@ async function generateImage(text: string) {
   // delay for random 3 seconds
   await bluebird.delay(Math.floor(Math.random() * 3000) + 3000);
 
-  // like and comment 5 timeline feeds
+  // like and comment 3 timeline feeds
   console.log("🚀 Like Timeline Feeds 3 times");
-  let likeNcommentTimes = 5;
+  let likeNcommentTimes = 3;
 
   try {
     const feed = ig.feed.timeline();
     const items = await feed.items();
 
     items.forEach(async (item) => {
-      if (likeNcommentTimes === 0) return console.log("✅ Like Timeline Feeds 5 times finished");
+      if (likeNcommentTimes === 0) return console.log("✅ Like Timeline Feeds 3 times finished");
 
       if (item.user.username == "dhohirpradana") return console.log("❌ Skip own feed");
 
