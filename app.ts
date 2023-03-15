@@ -321,24 +321,32 @@ async function generateImage(text: string) {
 
       if (item.user.username == "dhohirpradana") return console.log("❌ Skip own feed");
 
-      // like a timeline feed
-      await ig.media.like({
-        mediaId: item.id,
-        moduleInfo: {
-          module_name: "profile",
-          user_id: item.user.pk,
-          username: item.user.username,
-        },
-        d: 0,
-      });
+      try {
+        // like a timeline feed
+        await ig.media.like({
+          mediaId: item.id,
+          moduleInfo: {
+            module_name: "profile",
+            user_id: item.user.pk,
+            username: item.user.username,
+          },
+          d: 0,
+        });
+      } catch (error) {
+        console.log("❌ Error like timeline feed", error);
+      }
 
-      // comment a timeline feed
-      const comment = await getQuotes1();
+      try {
+        // comment a timeline feed
+        const comment = await getQuotes1();
 
-      await ig.media.comment({
-        mediaId: item.id,
-        text: comment,
-      });
+        await ig.media.comment({
+          mediaId: item.id,
+          text: comment,
+        });
+      } catch (error) {
+        console.log("❌ Error comment timeline feed", error);
+      }
 
       // delay for random between 5 and 15 seconds
       await bluebird.delay(Math.floor(Math.random() * 10 + 5) * 1000);
