@@ -1,4 +1,5 @@
 # Instagram Automation Feed and Story
+Ikuti saya di LinkedIn: https://linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=dhohirpradana
 
 Automate post Instagram feed and Instagram story.
 
